@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { searchDetails } from '../../redux/actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,10 @@ import PropTypes from 'prop-types';
 
 const Details = ({ match, details, loading, searchDetails }) => {
     useEffect(() => {
-        searchDetails({ id: match.params.id });
-    }, [match.params.id]);
+        if (details && details.id !== match.params.id) {
+            searchDetails({ id: match.params.id });
+        }
+    }, [searchDetails, details, match.params.id]);
 
     return (
         <div className='container'>

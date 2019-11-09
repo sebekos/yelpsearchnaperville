@@ -17,10 +17,11 @@ const SearchItem = ({
             <img src={image_url} alt='Business Icon' />
             <div>{name}</div>
             <div>
-                {review_count} - {rating} / 5
+                {review_count ? `${review_count} - ` : null}
+                {rating ? `${rating} / 5` : 'N / A'}
             </div>
-            <div>{display_address[0]}</div>
-            <div>{display_phone}</div>
+            <div>{display_address ? display_address[0] : 'N / A'}</div>
+            <div>{display_phone ? display_phone : 'N / A'}</div>
             <div className='moredetails'>
                 <Link className='btn btn-primary' to={`/details/${id}`}>
                     More Details

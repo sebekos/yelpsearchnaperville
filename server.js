@@ -17,7 +17,7 @@ app.post(
     '/search',
     [
         [
-            check('term', 'Search term must be greater than 1 and less than 32')
+            check('term', 'Search term must be between 1 and 32 characters')
                 .isLength({
                     min: 1,
                     max: 32
