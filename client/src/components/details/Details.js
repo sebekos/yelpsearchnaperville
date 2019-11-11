@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { searchDetails } from '../../redux/actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,18 +6,18 @@ import Hours from './Hours';
 import PropTypes from 'prop-types';
 
 const Details = ({ match, details, loading, searchDetails }) => {
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (details && details.id !== match.params.id) {
             searchDetails({ id: match.params.id });
         }
-    }, [searchDetails, details, match.params.id]);
+    }, []);
 
     return (
         <div className='container'>
             <Link to='/' className='btn btn-primary goback'>
                 Go Back
             </Link>
-            {!loading && details ? (
+            {details && !loading ? (
                 <div className='details-container'>
                     <div className='details-title'>
                         {details.name ? details.name : 'N/A'}
