@@ -1,28 +1,36 @@
 export const dayConvert = day => {
     switch (day) {
         case 0:
-            return 'Monday';
+            return "Monday";
         case 1:
-            return 'Tuesday';
+            return "Tuesday";
         case 2:
-            return 'Wednesday';
+            return "Wednesday";
         case 3:
-            return 'Thursday';
+            return "Thursday";
         case 4:
-            return 'Friday';
+            return "Friday";
         case 5:
-            return 'Saturday';
+            return "Saturday";
         case 6:
-            return 'Sunday';
+            return "Sunday";
         default:
-            return 'N/A';
+            return "N/A";
     }
 };
 
 export const timeConvert = time => {
     var hours24 = parseInt(time.substring(0, 2));
     var hours = ((hours24 + 11) % 12) + 1;
-    var amPm = hours24 > 11 ? 'pm' : 'am';
+    var amPm = hours24 > 11 ? "pm" : "am";
     var minutes = time.substring(2);
-    return hours + ':' + minutes + amPm;
+    return hours + ":" + minutes + amPm;
+};
+
+export const isOpenNow = status => {
+    if (status === true) {
+        return "Open";
+    } else {
+        return "Closed";
+    }
 };

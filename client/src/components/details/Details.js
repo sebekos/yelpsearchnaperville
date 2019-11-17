@@ -1,10 +1,11 @@
-import React, { useLayoutEffect } from 'react';
-import { searchDetails } from '../../redux/actions/index';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Hours from './Hours';
-import PropTypes from 'prop-types';
-
+import React, { useLayoutEffect } from "react";
+import { searchDetails } from "../../redux/actions/index";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { isOpenNow } from "../../utils/data";
+import Hours from "./Hours";
+import PropTypes from "prop-types";
+//isOpenNow
 const Details = ({ match, details, loading, searchDetails }) => {
     useLayoutEffect(() => {
         if (details && details.id !== match.params.id) {
@@ -13,65 +14,69 @@ const Details = ({ match, details, loading, searchDetails }) => {
     }, []);
 
     return (
-        <div className='container'>
-            <Link to='/' className='btn btn-primary goback'>
+        <div className="container">
+            <Link to="/" className="btn btn-primary goback">
                 Go Back
             </Link>
             {details && !loading ? (
-                <div className='details-container'>
-                    <div className='details-title'>
-                        {details.name ? details.name : 'N/A'}
+                <div className="details-container">
+                    <div className="details-title">
+                        {details.name ? details.name : "N/A"}
                     </div>
-                    <div className='details-photo'>
-                        <img src={details.image_url} alt='Icon' />
+                    <div className="details-photo">
+                        <img src={details.image_url} alt="Icon" />
                     </div>
-                    <div className='details-item'>
-                        <div className='left-item'>Location</div>
-                        <div className='right-item'>
+                    <div className="details-item">
+                        <div className="left-item">Location</div>
+                        <div className="right-item">
                             {details.location
                                 ? details.location.display_address[0]
-                                : 'N/A'}
+                                : "N/A"}
                         </div>
                     </div>
-                    <div className='details-item'>
-                        <div className='left-item'>Open</div>
-                        <div className='right-item'>test</div>
+                    <div className="details-item">
+                        <div className="left-item">Currently</div>
+                        <div className="right-item">
+                            {details.hours
+                                ? isOpenNow(details.hours[0].is_open_now)
+                                : "N/A"}
+                        </div>
                     </div>
-                    <div className='details-item'>
-                        <div className='left-item'>Phone</div>
-                        <div className='right-item'>
+                    <div className="details-item">
+                        <div className="left-item">Phone</div>
+                        <div className="right-item">
                             {details.display_phone
                                 ? details.display_phone
-                                : 'N/A'}
+                                : "N/A"}
                         </div>
                     </div>
-                    <div className='details-item'>
-                        <div className='left-item'>Reviews</div>
-                        <div className='right-item'>
+                    <div className="details-item">
+                        <div className="left-item">Reviews</div>
+                        <div className="right-item">
                             {details.review_count
                                 ? details.review_count
-                                : 'N/A'}
+                                : "N/A"}
                         </div>
                     </div>
-                    <div className='details-item'>
-                        <div className='left-item'>Rating</div>
-                        <div className='right-item'>
-                            {details.rating ? details.rating : 'N/A'} / 5
+                    <div className="details-item">
+                        <div className="left-item">Rating</div>
+                        <div className="right-item">
+                            {details.rating ? details.rating : "N/A"} / 5
                         </div>
                     </div>
-                    <div className='details-item'>
-                        <div className='left-item'>Website</div>
-                        <div className='right-item'>
+                    <div className="details-item">
+                        <div className="left-item">Website</div>
+                        <div className="right-item">
                             {details.url ? (
                                 <a
                                     href={details.url}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     Link
                                 </a>
                             ) : (
-                                'N/A'
+                                "N/A"
                             )}
                         </div>
                     </div>
@@ -95,7 +100,4 @@ const mapStateToProps = state => ({
     loading: state.loading
 });
 
-export default connect(
-    mapStateToProps,
-    { searchDetails }
-)(Details);
+export default connect(mapStateToProps, { searchDetails })(Details);
